@@ -25,6 +25,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -52,6 +53,12 @@ public class Main {
   String index() {
     return "index";
   }
+
+  @RequestMapping("/hello")
+  String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Map<String, Object> model) {
+		model.put("name", name);
+		return "greeting";
+	}
 
   @RequestMapping("/db")
   String db(Map<String, Object> model) {
